@@ -1,9 +1,6 @@
 from abc import abstractmethod, ABC
 
 
-
-
-
 class Weapon(ABC):
     @abstractmethod
     def atach(self):
@@ -11,22 +8,36 @@ class Weapon(ABC):
 
 class Sword(Weapon):
     def atach(self):
-        print('Боец выбирает меч.')
         print('Боец наносит удар мечом')
-        print('Монстр побеждён')
 
 class Bow(Weapon):
     def atach(self):
-        print('Боец выбирает лук.')
-        print('Боец наносит стреляет из лука')
-        print('Монстр побеждён')
+        print('Боец стреляет из лука')
 
-class Figther():
+
+class Fighter():
     def __init__(self, weapon: Weapon):
         self.weapon = weapon
 
-    def change_weapon(self):
-        print(f'Боец сменил оружие на {self.weapon}')
+    def change_weapon(self, new_weapon: Weapon):
+        self.weapon = new_weapon
+        print(f'Боец сменил оружие')
+
+    def fight(self):
+        self.weapon.atach()
+        print('Монстр побеждён!')
+
 
 class Monster():
     pass
+
+
+sword = Sword()
+bow = Bow()
+
+fighter = Fighter(bow)
+
+fighter.fight()
+
+fighter.change_weapon(sword)
+fighter.fight()
